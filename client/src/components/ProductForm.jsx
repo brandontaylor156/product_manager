@@ -21,7 +21,7 @@ const ProductForm = () => {
                 setDescription("");
             })
     }
-    //onChange to update firstName and lastName
+    
     return (
         <form onSubmit={onSubmitHandler}>
             <p>
