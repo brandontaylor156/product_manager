@@ -6,10 +6,10 @@ module.exports.index = (request, response) => {
     });
 }
 
-module.exports.findAllProducts = (req, res) => {
+module.exports.findAllProducts = (request, response) => {
     Product.find()
-      .then(allProducts => res.json(allProducts))
-      .catch(err => res.json({ message: "Something went wrong", error: err }));
+      .then(productList => response.json(productList))
+      .catch(err => response.json({ message: "Something went wrong", error: err }))
   };
 
 module.exports.createProduct = (request, response) => {
@@ -25,12 +25,14 @@ module.exports.createProduct = (request, response) => {
 
 module.exports.getProduct = (request, response) => {
     Product.findOne({_id:request.params.id})
-        .then(product => response.json(product))
+        .then(product => {
+            response.json(product);
+        })
         .catch(err => response.json(err))
 }
 
 module.exports.updateProduct = (request, response) => {
-    Product.findOneAndUpdate({_id:request.params.id}, request.body, {new:true})
+    Product.findOneAndUpdate({_id:request.params.id}, request.body, {new:true, runValidators: true})
         .then(updatedProduct => response.json(updatedProduct))
         .catch(err => response.json(err))
 }
@@ -40,3 +42,4 @@ module.exports.deleteProduct = (request, response) => {
         .then(deleteConfirmation => response.json(deleteConfirmation))
         .catch(err => response.json(err))
 }
+

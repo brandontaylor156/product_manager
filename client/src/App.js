@@ -9,9 +9,9 @@ function App() {
     <div className="App">
          <Routes>
             <Route path='/' element={ <Navigate to={'/product/'} /> } />
-            <Route element={<Main/>} path="/product/" />
-            <Route element={<Detail/>} path="/product/:id" />
-            <Route element={<Update/>} path="/product/:id/edit"/>
+            <Route path="/product/" element={<Main/>} />
+            <Route path="/product/:id" element={<Detail/>} />
+            <Route path="/product/:id/edit" element={<Update/>} />
          </Routes>                         
     </div>
     );

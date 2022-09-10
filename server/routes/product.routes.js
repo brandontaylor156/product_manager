@@ -7,4 +7,3 @@ module.exports = function(app){
     app.put('/api/product/:id', ProductController.updateProduct);
     app.delete('/api/product/:id', ProductController.deleteProduct)
 }
-

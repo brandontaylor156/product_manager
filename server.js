@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 require('./server/config/mongoose.config'); 
 app.use(cors());
@@ -9,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./server/routes/product.routes')(app);
 
-app.listen(8000, () => {
-    console.log("Listening at Port 8000")
+app.listen(process.env.PORT, () => {
+    console.log(`Listening at Port ${process.env.PORT}`)
 })
+
