@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 
 const ProductForm = (props) => {
     const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
@@ -10,6 +9,9 @@ const ProductForm = (props) => {
     const onSubmitHandler = e => {
         e.preventDefault();
         onSubmitProp({title, price, description})
+        setTitle("")
+        setPrice(0)
+        setDescription("")
     }
     
     return (

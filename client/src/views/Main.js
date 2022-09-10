@@ -3,7 +3,7 @@ import axios from 'axios'
 import ProductForm from '../components/ProductForm';
 import ProductList from '../components/ProductList';
 
-const Main = (props) => {
+const Main = () => {
     const [products, setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
@@ -14,18 +14,28 @@ const Main = (props) => {
                 setLoaded(true);
             })
             .catch(err => console.error(err));
-    },[products]);
+    },[]);
 
     const removeFromDom = productId => {
         setProducts(products.filter(product => product._id !== productId));
     }
 
+    const createProduct = product => {
+        axios.post('http://localhost:8000/api/product', product)
+            .then(res => {
+                setProducts([...products, res.data])
+            })
+    }
+
     return (
-        <div>
-           <ProductForm />
-           <hr/>
-           {loaded && <ProductList products={products} removeFromDom={removeFromDom}/>}
-        </div>
+        <>
+            <h1>Home</h1>
+            <div>
+                <ProductForm onSubmitProp={createProduct} initialTitle="" initialDescription="" initialPrice={0} />
+                <hr/>
+                {loaded && <ProductList products={products} removeFromDom={removeFromDom}/>}
+            </div>
+        </>
     )
 }
 
